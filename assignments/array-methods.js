@@ -58,28 +58,79 @@ const runners = [
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs. Combine both the first and last names and populate a new array called `fullNames`. This array will contain just strings.
 let fullNames = [];
+runners.forEach((runner) => {
+ return fullNames.push(`${runner.first_name} ${runner.last_name}`);  
+})
+
 console.log(fullNames);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runners' first names in uppercase because the director BECAME DRUNK WITH POWER. Populate an array called `firstNamesAllCaps`. This array will contain just strings.
 let firstNamesAllCaps = [];
+
+runners.map((firstname) => {
+ firstNamesAllCaps.push(firstname.first_name.toUpperCase());
+ return firstNamesAllCaps
+})
 console.log(firstNamesAllCaps);
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue. We need a filtered version of the runners array, containing only those runners with large sized shirts so they can choose a different size. This will be an array of objects.
 let runnersLargeSizeShirt = [];
+
+runners.filter( (LargeShirts) => {
+  if(LargeShirts.shirt_size == 'L'){
+    runnersLargeSizeShirt.push(LargeShirts);
+  }
+})
 console.log(runnersLargeSizeShirt);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations and save the total into a ticketPriceTotal variable.
-let ticketPriceTotal = 0;
+let ticketPriceTotal = runners.reduce( (accumalator, don) => {
+ return accumalator += don.donation;  
+},0 );
+//runners.reduce( (accumalator, price) => {
+ //accumalator + price.donation; 
+ //ticketPriceTotal = total
+ //return ticketPriceTotal;
+//})
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Id's 1-20 were caught with enhancement drugs. The Athletic commision wants you to take the id's(1-20), and put them in a new array, so that they will be disqualified from the 5k race. 
+let disqualify = [];
 
+runners.map( (runner) => {
+if(runner.id <= 20){
+ return disqualify.push(runner); 
+}
+})
+
+console.log(disqualify);
 // Problem 2
+// Make a new array that contains small size shirts.
+let Odds = [];
+runners.forEach( (runner) => {
+if(runner.shirt_size == 'S'){
+  return Odds.push(runner); 
+}
+})
+console.log(Odds);
+
+
 
 // Problem 3
+// Display a new array that contains all odd id's with the shirt size of large.  
+
+let odd = [];
+runners.map( (runner) => {
+ if(runner.id % 2 && runner.shirt_size == 'L'){
+   return odd.push(runner); 
+ }
+})
+
+console.log(odd); 
